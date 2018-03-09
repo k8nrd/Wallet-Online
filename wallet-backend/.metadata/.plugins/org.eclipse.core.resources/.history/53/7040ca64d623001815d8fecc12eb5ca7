@@ -1,0 +1,5 @@
+package com.k8nrd.domains;
+
+public class User {
+
+}
