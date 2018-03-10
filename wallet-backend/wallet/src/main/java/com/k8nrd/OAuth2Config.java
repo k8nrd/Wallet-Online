@@ -27,7 +27,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	private int expiration;
+	private int expiration = 1000;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

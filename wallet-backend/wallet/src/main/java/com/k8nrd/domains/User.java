@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
@@ -33,9 +34,8 @@ public class User implements UserDetails {
 	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Transaction> userTransactions;
-	
+	@Column(name = "enabled", nullable = false)
+	private boolean enabled;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -63,7 +63,7 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return enabled;
 	}
 
 	@Override
@@ -76,14 +76,24 @@ public class User implements UserDetails {
 		return username;
 	}
 
-	public List<Transaction> getUserTransactions() {
-		return userTransactions;
+	public Long getId() {
+		return id;
 	}
 
-	public void setUserTransactions(List<Transaction> userTransactions) {
-		this.userTransactions = userTransactions;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	
-	
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 }

@@ -28,7 +28,6 @@ public abstract class Transaction {
 		this.id = id;
 	}
 
-	
 	public String getInfo() {
 		return info;
 	}
