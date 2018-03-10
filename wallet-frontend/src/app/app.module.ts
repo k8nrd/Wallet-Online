@@ -11,6 +11,10 @@ import { NavMenuComponent } from './Main/main/nav-menu/nav-menu.component';
 import { TransactionListComponent } from './Main/main/transaction-list/transaction-list.component';
 import { TransactionAddComponent } from './Main/main/transaction-add/transaction-add.component';
 import { ChartsComponent } from './Main/main/charts/charts.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ListRouter } from './Main/main/transaction-list/list-router';
+import { AddRouter } from './Main/main/transaction-add/add-router';
 
 
 @NgModule({
@@ -27,7 +31,11 @@ import { ChartsComponent } from './Main/main/charts/charts.component';
   ],
   imports: [
     NgbModule.forRoot(),
-    BrowserModule
+    BrowserModule,
+    RouterModule,
+    FormsModule,
+    AddRouter,
+    ListRouter
   ],
   providers: [],
   bootstrap: [AppComponent]

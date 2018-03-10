@@ -1,21 +1,29 @@
+
+
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6 offset-md-3 mt-5" style="border: solid; border-color: rgb(177,177,177); border-radius: 14px;">
   <div class="row">
   <div class="col-12">
     <div class="text-center">
     <div class="row mx-5 mt-3">
       <div class="col-12">
-        <h2>Transaction</h2>
+        <h2 style="color: rgb(47, 235, 163)">Transaction</h2>
       </div>
     </div>
   </div>
-    <div class="row mx-5 mt-3">
-        <div class="col-12">
-          <label>transaction title</label>
-          <input class="form-control">
-        </div>
+  <div class="row mx-5 mt-3">
+      <div class="col-12">
+          <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" checked="true" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="customRadioInline1">Income</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+              <label class="custom-control-label" for="customRadioInline2">Expense</label>
+            </div>
       </div>
+    </div>
       <div class="row mx-5 mt-3">
           <div class="col-12">
             <label>transaction describe</label>
@@ -24,13 +32,21 @@
         </div>
         <div class="row mx-5 mt-3">
             <div class="col-12">
-              <label>amount</label>
-              <input class="form-control">
+              <label>cathegory</label>
+              <select class="form-control">
+                  <option>siema</option>
+              </select>
             </div>
           </div>
-          <div class="row mx-5 mt-3">
+        <div class="row mx-5 mt-3">
+            <div class="col-12">
+              <label>amount</label>
+              <input type="number" step="0.01" class="form-control">
+            </div>
+          </div>
+          <div class="row mx-5 my-3">
               <div class="col-12">
-               <button class="btn w-100">Add</button>
+               <button class="btn w-100" style="background-color: rgb(47, 235, 163)">Add</button>
               </div>
             </div>
   </div>
