@@ -75,6 +75,11 @@ public class TransactionController {
 		in2.setInfo(prinicpal.getName());
 		in2.setPrice(new BigDecimal(10000));
 		ls.add(in2);
+		
+		for(int x=0; x< 12; x++){
+			ls.add(in2);
+			ls.add(in);
+		}
 		return new ResponseEntity<List<Transaction>>(ls, HttpStatus.OK);
 	}
 	

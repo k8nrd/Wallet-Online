@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPageComponent implements OnInit {
 
+  private email: string;
+  private password: string;
+  private repassword: string;
+  private serverError: boolean;
   constructor() { }
 
   ngOnInit() {

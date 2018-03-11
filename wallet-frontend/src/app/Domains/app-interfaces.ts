@@ -2,11 +2,11 @@ export interface Transaction {
     info:string;
     price: number;
     date: Date;
+    flag:boolean;
 }
 
 export interface Income extends Transaction {
     cathegory: IncomeCathegory;
-    flag:boolean;
 }
 
 export enum IncomeCathegory {
@@ -15,7 +15,6 @@ export enum IncomeCathegory {
 
 export interface Expense extends Transaction {
     cathegory: ExpenseCathegory;
-    flag: boolean;
 }
 
 export enum ExpenseCathegory {

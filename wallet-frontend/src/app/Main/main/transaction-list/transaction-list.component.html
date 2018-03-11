@@ -12,19 +12,10 @@
             <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
               <button class="btn btn-outline-danger" ngbDropdownToggle>Show</button>
               <div class="dropdown-menu" ngbDropdownMenu>
-                  <button class="dropdown-item">All</button>
+                  <button class="dropdown-item" (click)="onFilterChoose(1)">All</button>
                   <div class="dropdown-divider"></div>
-                <button class="dropdown-item">Expenses</button>
-                <div class="dropdown-divider"></div>
-                <button class="dropdown-item">Food</button>
-                <button class="dropdown-item">Clothes</button> 
-                <button class="dropdown-item">Utils</button>
-                <button class="dropdown-item">Goodies</button>
-                <div class="dropdown-divider"></div>
-                <button class="dropdown-item">Incomes</button>
-                <div class="dropdown-divider"></div>
-                <button class="dropdown-item">Salary</button>
-                <button class="dropdown-item">Donation</button>
+                <button class="dropdown-item" (click)="onFilterChoose(2)">Incomes</button>
+                <button class="dropdown-item" (click)="onFilterChoose(3)">Expenses</button>
               </div>
             </div>
             <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
@@ -32,8 +23,8 @@
               <div class="dropdown-menu" ngbDropdownMenu>
                 <button class="dropdown-item">Date &#xf062;</button>
                 <button class="dropdown-item">Date &#xf063;</button>
-                <button class="dropdown-item">Price &#xf062;</button>
-                <button class="dropdown-item">Price &#xf063;</button>
+                <button class="dropdown-item">Amount &#xf062;</button>
+                <button class="dropdown-item">Amount&#xf063;</button>
               </div>
             </div>
           </div>
@@ -44,7 +35,7 @@
     </div></div>
   </div>
     <div *ngIf="!isLoading" class="row">
-      <div *ngFor="let trans of transactions" class="col-md-8 offset-md-2 mt-5" style="border: solid; border-color: rgb(177,177,177); border-radius: 14px;">
+      <div *ngFor="let trans of curretViewTransactions" class="col-md-8 offset-md-2 mt-5" style="border: solid; border-color: rgb(177,177,177); border-radius: 14px;">
         <div class="row mx-2">
           <div class="col-12">
               <div class="text-center">
@@ -64,7 +55,7 @@
         </div>
         <div class="col-12 mt-5">
             <div class="text-center">
-                <ngb-pagination class="d-flex justify-content-center" [collectionSize]="70" [(page)]="page"></ngb-pagination>
+                <ngb-pagination class="d-flex justify-content-center" [collectionSize]="pagesNumber" (pageChange)="onPageChange($event)" [(page)]="page"></ngb-pagination>
             </div>
         </div>
 

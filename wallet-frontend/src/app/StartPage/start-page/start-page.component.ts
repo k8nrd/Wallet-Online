@@ -8,6 +8,8 @@ import { AppService } from '../../Services/auth-service';
 })
 export class StartPageComponent implements OnInit {
 
+  private email: string;
+  private password: string;
   constructor(private authService: AppService) { }
 
   ngOnInit() {
@@ -15,7 +17,6 @@ export class StartPageComponent implements OnInit {
 
   onLogin(){
     this.authService.obtainAccessToken("wizzzy","siema");
-    console.log(this.authService.isLogged());
-  }
+ }
 
 }

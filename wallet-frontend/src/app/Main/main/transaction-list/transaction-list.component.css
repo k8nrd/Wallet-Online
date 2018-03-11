@@ -1,0 +1,14 @@
+/deep/ .page-item.active .page-link {
+    border-color: rgb(47, 235, 163);
+    background-color: rgb(47, 235, 163);
+   
+}
+
+ /deep/ .page-link {
+    color: rgb(47, 235, 163);
+}
+
+/deep/ .page-link:hover {
+    color: rgb(151, 224, 196);
+}
+
