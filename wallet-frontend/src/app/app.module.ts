@@ -25,6 +25,7 @@ import { FusionChartsModule } from 'angular4-fusioncharts';
 import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
+import { ChartRouter } from './Main/main/charts/chart-router';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
 @NgModule({
@@ -49,7 +50,8 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     LoginRouter,
     RegisterRouter,
     HttpClientModule,
-    FusionChartsModule
+    FusionChartsModule,
+    ChartRouter
   ],
   providers: [AppService, CookieService, TransactionService],
   bootstrap: [AppComponent]

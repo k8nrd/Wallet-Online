@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Transaction, Expense, ExpenseCathegory } from '../../../Domains/app-interfaces';
+import { TransactionService } from '../../../Services/transaction-service';
 
 @Component({
   selector: 'app-charts',
@@ -6,47 +8,72 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent implements OnInit {
-
+  private transaction: Expense[];
   id = 'chart1';
-  width = 600;
+  width = 1000;
   height = 400;
   type = 'column2d';
   dataFormat = 'json';
   dataSource;
 
-  constructor() {
-      this.dataSource = {
-          "chart": {
-              "caption": "Harry's SuperMart",
-              "subCaption": "Top 5 stores in last month by revenue",
-              "numberprefix": "$",
-              "theme": "fint"
-          },
-          "data": [
-              {
-                  "label": "Bakersfield Central",
-                  "value": "880000"
-              },
-              {
-                  "label": "Garden Groove harbour",
-                  "value": "730000"
-              },
-              {
-                  "label": "Los Angeles Topanga",
-                  "value": "590000"
-              },
-              {
-                  "label": "Compton-Rancho Dom",
-                  "value": "520000"
-              },
-              {
-                  "label": "Daly City Serramonte",
-                  "value": "330000"
-              }
-          ]
-      }
+  constructor(private transactionService: TransactionService) {
   }
 
   ngOnInit() {
+    this.transactionService.getTransactionList().subscribe(trans => {
+      this.transaction = trans as Expense[];
+      console.log(this.transaction);
+      this.initChart();
+    })
+
   }
+
+  initChart() {
+    let pClothes:number=0;
+    let pFood:number=0;
+    let pGoodies:number=0;
+    let pUtils:number=0;
+
+    this.transaction.forEach(element => {
+      if(element.cathegory.toString() == ExpenseCathegory[ExpenseCathegory.CLOTHES]) {
+        pClothes=pClothes+element.price;
+      }
+      if(element.cathegory.toString() == ExpenseCathegory[ExpenseCathegory.FOOD]) {
+        pFood=pFood+element.price;
+      }
+      if(element.cathegory.toString() == ExpenseCathegory[ExpenseCathegory.GOODIES]) {
+        pGoodies=pGoodies+element.price;
+      }
+      if(element.cathegory.toString() == ExpenseCathegory[ExpenseCathegory.UTILS]) {
+        pUtils=pUtils+element.price;
+      }
+    });
+  
+  this.dataSource = {
+    "chart": {
+        "caption": "Your Expenses",
+        "subCaption": "by cathegory",
+        "numberprefix": "€",
+        "theme": "fint"
+    },
+    "data": [
+        {
+            "label": "Clothes",
+            "value": pClothes
+        },
+        {
+            "label": "Food",
+            "value": pFood
+        },
+        {
+            "label": "Goodies",
+            "value": pGoodies
+        },
+        {
+            "label": "Utils",
+            "value": pUtils
+        },
+    ]
+}
+}
 }
