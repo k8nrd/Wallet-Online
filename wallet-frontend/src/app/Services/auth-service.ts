@@ -11,17 +11,14 @@ export class AppService {
   
   obtainAccessToken(username:string, password:string){
     let headers = new HttpHeaders({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("gigy:secret")});
-
+    let success=false;
     let params = new URLSearchParams();
     params.append('username',username);
     params.append('password',password);    
     params.append('grant_type','password');
     params.append('client_id','gigy');
      
-    this._http.post('http://localhost:8080/oauth/token', params.toString(), {headers:headers})
-      .subscribe(
-        data => this.saveToken(data),
-        err => alert('Invalid Credentials')); 
+   return this._http.post('http://localhost:8080/oauth/token', params.toString(), {headers:headers});
   }
  
   saveToken(token){

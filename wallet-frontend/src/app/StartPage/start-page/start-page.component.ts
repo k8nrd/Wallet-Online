@@ -10,13 +10,19 @@ export class StartPageComponent implements OnInit {
 
   private email: string;
   private password: string;
+  private success = true;
   constructor(private authService: AppService) { }
 
   ngOnInit() {
   }
 
   onLogin(){
-    this.authService.obtainAccessToken("wizzzy","siema");
+    this.success = true;
+    this.authService.obtainAccessToken(this.email,this.password).subscribe(data => {
+      this.authService.saveToken(data);
+    }, err => {
+      this.success = false;
+    })
  }
 
 }

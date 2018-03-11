@@ -34,7 +34,7 @@ import com.k8nrd.repository.UserRepository;
 public class TransactionController {
 
 	@Autowired
-	UserRepository ur;
+	private UserRepository ur;
 	
 	
 	@PostMapping("/add/income")
@@ -84,7 +84,13 @@ public class TransactionController {
 	}
 	
 	@PostMapping("/register")
-	public String register(@RequestBody NewUserDTO newUser) {
-		return "siema";
+	public ResponseEntity<Boolean> register(@RequestBody NewUserDTO newUser) {
+		if(this.ur.findOneByUsername(newUser.getUsername()) == null){
+			this.ur.registerUser(newUser);
+			return new ResponseEntity<>(true, HttpStatus.CREATED);
+		}else {
+			return new ResponseEntity<>(false,HttpStatus.CONFLICT);
+		}
 	}
+	
 }

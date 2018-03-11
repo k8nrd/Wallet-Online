@@ -34,7 +34,7 @@ public class User implements UserDetails {
 	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@Column(name = "enabled", nullable = false)
+	@Column(name = "is_enabled", nullable = false)
 	private boolean enabled;
 
 	@Override

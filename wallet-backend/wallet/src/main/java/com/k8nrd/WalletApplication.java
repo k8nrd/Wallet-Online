@@ -16,8 +16,6 @@ import com.k8nrd.repository.UserRepository;
 @EnableResourceServer
 public class WalletApplication {
 	
-	@Autowired
-	private UserRepository ur;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WalletApplication.class, args);

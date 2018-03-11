@@ -2,9 +2,12 @@ package com.k8nrd.repository;
 
 import java.util.List;
 
+import javax.transaction.UserTransaction;
+
 import com.k8nrd.domains.NewUserDTO;
 import com.k8nrd.domains.Transaction;
 import com.k8nrd.domains.User;
+import com.k8nrd.domains.UserTransactions;
 
 public interface UserRepository {
 	User findOneByUsername(String username);
@@ -14,4 +17,5 @@ public interface UserRepository {
 	Transaction deleteUserTransaction(String username, long id);
 	Transaction getTransaction(String username, long id);
 	User registerUser(NewUserDTO user);
+	UserTransactions getUserDetailsTransaction(String username);
 }

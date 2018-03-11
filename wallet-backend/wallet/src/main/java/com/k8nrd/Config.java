@@ -23,7 +23,7 @@ public class Config extends WebSecurityConfigurerAdapter {
 		    http.antMatcher("/register")
 	        .authorizeRequests()
 	        .antMatchers("/register")
-	        .permitAll();
+	        .permitAll().and().csrf().disable();
 		        
 		
 	}
