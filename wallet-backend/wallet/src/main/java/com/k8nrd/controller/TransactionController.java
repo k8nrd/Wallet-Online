@@ -15,14 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.k8nrd.domains.Expense;
 import com.k8nrd.domains.ExpenseCathegory;
+import com.k8nrd.domains.ExpenseDTO;
 import com.k8nrd.domains.Income;
 import com.k8nrd.domains.IncomeCathegory;
+import com.k8nrd.domains.IncomeDTO;
 import com.k8nrd.domains.NewUserDTO;
 import com.k8nrd.domains.Transaction;
 import com.k8nrd.domains.User;
 import com.k8nrd.repository.UserRepository;
+
 
 @RestController
 public class TransactionController {
@@ -32,13 +38,26 @@ public class TransactionController {
 	
 	
 	@PostMapping("/add/income")
-	public ResponseEntity<Income> saveIncome(@RequestBody Income income, Principal prinicpal){
-		return null;
+	public ResponseEntity<Income> saveIncome(@RequestBody IncomeDTO income, Principal prinicpal) throws JsonProcessingException{
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		String json = ow.writeValueAsString(income);
+		System.out.println(json);
+		return new ResponseEntity<Income>(HttpStatus.OK);
 	}
 	
 	@PostMapping("/add/expense")
-	public ResponseEntity<Expense> saveIncome(@RequestBody Expense expense, Principal prinicpal){
-		return null;
+	public ResponseEntity<Expense> saveIncome(@RequestBody ExpenseDTO expense, Principal prinicpal){
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		String json;
+		try {
+			json = ow.writeValueAsString(expense);
+			System.out.println(json);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new ResponseEntity<Expense>(HttpStatus.CONFLICT);
 	}
 	
 	@GetMapping("/list/all")

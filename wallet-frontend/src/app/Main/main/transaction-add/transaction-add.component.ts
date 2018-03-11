@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { IncomeCathegory, ExpenseCathegory } from '../../../Domains/app-interfaces';
 import { isNumber } from 'util';
 import { TransactionService } from '../../../Services/transaction-service';
@@ -22,7 +22,7 @@ export class TransactionAddComponent implements OnInit {
   private expenseCathegory: string[];
   private cathegoryView: string[];
 
-  constructor(private transactionService: TransactionService) { }
+  constructor(private transactionService: TransactionService, private cdRef : ChangeDetectorRef) { }
 
   ngOnInit() {
     this.initiation();
@@ -44,13 +44,20 @@ export class TransactionAddComponent implements OnInit {
       }
     }
     this.cathegoryView = this.incomeCathegory;
+    this.cdRef.detectChanges();
   }
 
   onAdd() {
     if(this.incomeFlag){
-     /// this.transactionService.addIncome()
+     this.transactionService.addIncome({date: this.date, cathegory: this.cathegory, flag: true, info: this.info, price: this.amount}).subscribe(date => {
+      console.log("spoko");
+     })
     }else {
-      // this.transactionService.
+      this.transactionService.addExpense({date: this.date, cathegory: this.cathegory, flag: false, info: this.info, price: this.amount}).subscribe(date => {
+        console.log("tutajnie powinego tego byc");
+      }, err => {
+        console.log("blad !1!, ale ok")
+      })
     }
   }
 
@@ -75,5 +82,7 @@ export class TransactionAddComponent implements OnInit {
       this.expenseFlag = true;
       this.cathegoryView = this.expenseCathegory;
     }
+    this.cathegory = null;
+    this.cdRef.detectChanges();
   }
 }
