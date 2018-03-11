@@ -8,15 +8,26 @@ import javax.persistence.Entity;
 @DiscriminatorValue("I")
 public class Income extends Transaction {
 
-	private IncomeCathegory incomeCathegory;
+	private IncomeCathegory cathegory;
+	private boolean flag = true;
 
-	public IncomeCathegory getIncomeCathegory() {
-		return incomeCathegory;
+	public IncomeCathegory getCathegory() {
+		return cathegory;
 	}
 
-	public void setIncomeCathegory(IncomeCathegory incomeCathegory) {
-		this.incomeCathegory = incomeCathegory;
+	public void setCathegory(IncomeCathegory cathegory) {
+		this.cathegory = cathegory;
 	}
+
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
+
+	
 	
 	
 }

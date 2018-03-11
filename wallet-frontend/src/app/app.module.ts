@@ -15,6 +15,12 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ListRouter } from './Main/main/transaction-list/list-router';
 import { AddRouter } from './Main/main/transaction-add/add-router';
+import { LoginRouter } from './StartPage/start-page/login-router';
+import { RegisterRouter } from './StartPage/register-page/register-router';
+import { AppService } from './Services/auth-service';
+import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { TransactionService } from './Services/transaction-service';
 
 
 @NgModule({
@@ -35,9 +41,12 @@ import { AddRouter } from './Main/main/transaction-add/add-router';
     RouterModule,
     FormsModule,
     AddRouter,
-    ListRouter
+    ListRouter,
+    LoginRouter,
+    RegisterRouter,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AppService, CookieService, TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

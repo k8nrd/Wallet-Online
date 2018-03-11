@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionService } from '../../../Services/transaction-service';
+import { Transaction, IncomeCathegory } from '../../../Domains/app-interfaces';
 
 @Component({
   selector: 'app-transaction-list',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionListComponent implements OnInit {
 
-  constructor() { }
+  private transactions: Transaction[];
+  private isError: boolean = false;
+  constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {
+    this.transactionService.getTransactionList().subscribe(data => {
+      this.transactions = data;
+    },err => {
+      this.isError = true;
+      console.log(err);
+    })
   }
 
 }
