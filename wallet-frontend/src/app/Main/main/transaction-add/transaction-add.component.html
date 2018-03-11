@@ -15,40 +15,57 @@
   <div class="row mx-5 mt-3">
       <div class="col-12">
           <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" checked="true" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+              <input type="radio" checked="true" #r1 (click)="onRadioButtonClick(r1)" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
               <label class="custom-control-label" for="customRadioInline1">Income</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+              <input type="radio" id="customRadioInline2" #r2 (click)="onRadioButtonClick(r2)"  name="customRadioInline1" class="custom-control-input">
               <label class="custom-control-label" for="customRadioInline2">Expense</label>
             </div>
       </div>
     </div>
       <div class="row mx-5 mt-3">
           <div class="col-12">
-            <label>transaction describe</label>
-            <input class="form-control">
+            <label>transaction info </label>
+            <input class="form-control" placeholder="&#xf129;">
           </div>
         </div>
         <div class="row mx-5 mt-3">
             <div class="col-12">
-              <label>cathegory</label>
-              <select class="form-control">
-                  <option>siema</option>
+              <label>cathegory <span style="color: red" *ngIf="cth.invalid">(required)</span> </label>
+              <select required class="form-control" #cth="ngModel" [(ngModel)]="cathegory">
+                  <option [value]="c" *ngFor="let c of cathegoryView">{{c}}</option>
               </select>
+              {{cathegory}}
             </div>
           </div>
         <div class="row mx-5 mt-3">
-            <div class="col-12">
-              <label>amount</label>
-              <input type="number" step="0.01" class="form-control">
+            <div  class="col-12">
+              <label>amount <span style="color: red" *ngIf="am.invalid">(required)</span> <span style="color: red" *ngIf="amount <=0 ">(must be greather than zero!)</span> </label>
+              <input required minlength="1" #am="ngModel"  [(ngModel)]="amount" type="number" step="0.01" class="form-control" placeholder="&#xf153;">
             </div>
           </div>
-          <div class="row mx-5 my-3">
+          <div class="row mx-5 mt-3">
               <div class="col-12">
-               <button class="btn w-100" style="background-color: rgb(47, 235, 163)">Add</button>
+                  <label>transaction date</label>
+                  <div class="input-group">                
+                      <input class="form-control" placeholder="today"
+                             name="dp" [(ngModel)]="modelDate" (ngModelChange)="onDateChange()" ngbDatepicker #d="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                          &#xf073;
+                        </button>
+                      </div>
+                    </div>
               </div>
             </div>
+      
+          <div class="row mx-5 my-3">
+              <div class="col-12">
+               <button class="btn w-100" (click)="onAdd()" [disabled]="am.invalid || amount <= 0 || cth.invalid" style="background-color: rgb(47, 235, 163)">Add</button>
+              </div>
+            </div>
+
   </div>
 </div>
 </div>

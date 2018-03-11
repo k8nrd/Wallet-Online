@@ -21,7 +21,11 @@ import { AppService } from './Services/auth-service';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { TransactionService } from './Services/transaction-service';
-
+import { FusionChartsModule } from 'angular4-fusioncharts';
+import * as FusionCharts from 'fusioncharts';
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
+FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
 @NgModule({
   declarations: [
@@ -44,7 +48,8 @@ import { TransactionService } from './Services/transaction-service';
     ListRouter,
     LoginRouter,
     RegisterRouter,
-    HttpClientModule
+    HttpClientModule,
+    FusionChartsModule
   ],
   providers: [AppService, CookieService, TransactionService],
   bootstrap: [AppComponent]
