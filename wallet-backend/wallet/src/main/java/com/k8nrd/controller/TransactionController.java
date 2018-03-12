@@ -39,9 +39,8 @@ public class TransactionController {
 	
 	@PostMapping("/add/income")
 	public ResponseEntity<Income> saveIncome(@RequestBody IncomeDTO income, Principal prinicpal) throws JsonProcessingException{
-		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		String json = ow.writeValueAsString(income);
-		System.out.println(json);
+		this.ur.addUserTransactionIncome(prinicpal.getName(), income);
+		System.out.println("ok1");
 		return new ResponseEntity<Income>(HttpStatus.OK);
 	}
 	

@@ -1,6 +1,7 @@
 package com.k8nrd.repository;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,6 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.k8nrd.domains.Expense;
+import com.k8nrd.domains.ExpenseDTO;
+import com.k8nrd.domains.Income;
+import com.k8nrd.domains.IncomeDTO;
 import com.k8nrd.domains.NewUserDTO;
 import com.k8nrd.domains.Transaction;
 import com.k8nrd.domains.User;
@@ -28,12 +33,6 @@ public class UserRepoImpl implements UserRepository {
 
 	@Override
 	public User findOneByUsername(String username) {
-		//User u = new User();
-		//u.setUsername("wizzzy");
-		//u.setEnabled(true);
-		//u.setPassword(new BCryptPasswordEncoder().encode("siema"));
-	//	u.setId(1L);
-		
 		Criteria c = this.sf.getCurrentSession().createCriteria(User.class);
 		c.add(Restrictions.eq("username", username));
 		List<User> ut = c.list();
@@ -56,27 +55,29 @@ public class UserRepoImpl implements UserRepository {
 		 
 	}
 
-	@Override
-	public Transaction addUserTransaction(String username, Transaction transaction) {
-		
-		return null;
-	}
 
 	@Override
 	public Transaction updateUserTransaction(String username, Transaction transaction) {
-		// TODO Auto-generated method stub
+		//UserTransactions ut = this.getUserDetailsTransaction(username);
 		return null;
 	}
 
 	@Override
 	public Transaction deleteUserTransaction(String username, long id) {
-		// TODO Auto-generated method stub
-		return null;
+		UserTransactions ut = this.getUserDetailsTransaction(username);
+		int index = 0;
+		int iter = 0;
+		for(Transaction t : ut.getTransactionList()){
+			if(t.getId() == id){
+				index = iter;
+			}
+			iter++;
+		}
+		return ut.getTransactionList().remove(index);
 	}
 
 	@Override
 	public Transaction getTransaction(String username, long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -105,6 +106,32 @@ public class UserRepoImpl implements UserRepository {
 		}else {
 			return ut.get(0);
 		}
+	}
+
+	@Override
+	public Transaction addUserTransactionIncome(String username, IncomeDTO transaction) {
+		UserTransactions ut = this.getUserDetailsTransaction(username);
+		Income i = new Income();
+		i.setCathegory(transaction.getCathegory());
+		i.setDate(transaction.getDate());
+		i.setFlag(true);
+		i.setInfo(transaction.getInfo());
+		i.setPrice(transaction.getPrice());
+		ut.getTransactionList().add(i);
+		return i;
+	}
+
+	@Override
+	public Transaction addUserTransactionExpense(String username, ExpenseDTO transaction) {
+		UserTransactions ut = this.getUserDetailsTransaction(username);
+		Expense i = new Expense();
+		i.setCathegory(transaction.getCathegory());
+		i.setDate(transaction.getDate());
+		i.setFlag(true);
+		i.setInfo(transaction.getInfo());
+		i.setPrice(transaction.getPrice());
+		ut.getTransactionList().add(i);
+		return i;
 	}
 
 }
