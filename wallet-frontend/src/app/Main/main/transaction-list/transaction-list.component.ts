@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TransactionService } from '../../../Services/transaction-service';
-import { Transaction, IncomeCathegory, Income } from '../../../Domains/app-interfaces';
+import { Transaction, IncomeCathegory, Income, Expense } from '../../../Domains/app-interfaces';
 
 @Component({
   selector: 'app-transaction-list',
@@ -19,7 +19,7 @@ export class TransactionListComponent implements OnInit {
   private expensesSum;
   private incomesSum;
   private balance;
-  constructor(private transactionService: TransactionService) { }
+  constructor(private transactionService: TransactionService, private cdRef : ChangeDetectorRef) { }
 
   ngOnInit() {
     this.balance = 0;
@@ -30,6 +30,7 @@ export class TransactionListComponent implements OnInit {
       this.curretViewTransactions = this.filteredTransactions.slice(0,5);
       this.page = 1;
       this.pagesNumber = (this.filteredTransactions.length / 5)*10;
+      this.balanceCount();
     },err => {
       this.isError = true;
       console.log(err);
@@ -37,8 +38,8 @@ export class TransactionListComponent implements OnInit {
   }
 
   balanceCount() {
-    let incomes =0
-    let expenseSum=0
+    let incomes =0;
+    let expenseSum =0;
 
     this.transactions.forEach(tran => {
       if(tran.flag){
@@ -81,6 +82,26 @@ export class TransactionListComponent implements OnInit {
   onPageChange(newPage) {
     this.pagesNumber = (this.filteredTransactions.length / 5)*10;
     this.curretViewTransactions = this.filteredTransactions.slice((newPage-1)*5,((newPage-1)*5)+5);
+  }
+
+  onDelete(id:number) {
+    this.transactionService.delete(id).subscribe(date => {
+      this.cdRef.detectChanges();
+      this.ngOnInit();
+    })
+  
+  }
+
+  repeatTransaction(trans) {
+    if(trans.flag){
+      this.transactionService.addIncome(trans as Income).subscribe(date => {
+        this.ngOnInit();
+      });
+    }else {
+      this.transactionService.addExpense(trans as Expense).subscribe(date => {
+        this.ngOnInit();
+      });
+    }
   }
 
   

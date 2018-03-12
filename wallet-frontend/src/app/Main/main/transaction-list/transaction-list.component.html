@@ -2,13 +2,13 @@
 
 <div class="container-fluid">
   <div class="row my-3">
-      <div class="col-4"><div class="text-center">
-          <p style="text-align: right"><b>incomes: {{balance}}<span style="color: gold;">&#xf153;</span></b></p>
-          <p style="text-align: right"><b>expenses: {{balance}}<span style="color: gold;">&#xf153;</span></b></p>
+      <div class="col-md-4 my-4 order-first"><div class="text-center">
+          <p style="text-align: right"><b>incomes: {{incomesSum}}<span style="color: gold;">&#xf153;</span></b></p>
+          <p style="text-align: right"><b>expenses: {{expensesSum}}<span style="color: gold;">&#xf153;</span></b></p>
       <hr>
       <h3 style="text-align: right"><b>account balance: {{balance}}<span style="color: gold;">&#xf153;</span></b></h3>
         </div></div>
-    <div *ngIf="!isLoading"  class="col-4">
+    <div *ngIf="!isLoading"  class="col-md-4 my-4 order-last">
       <div class="text-center">
         <h1 style="color: rgb(47, 235, 163)"><b>Transaction list</b></h1>
         <div class="btn-group">
@@ -33,7 +33,7 @@
           </div>
       </div>
     </div>
-    <div class="col-4"><div class="text-center">
+    <div class="col-md-4 my-4 order-md-last"><div class="text-center">
       <h1 ><span routerLink="/add" style="cursor: pointer" class="mx-5">&#xf0fe; </span><span style="cursor: pointer" routerLink="/charts">&#xf080;</span></h1>
     </div></div>
   </div>
@@ -56,6 +56,7 @@
       <div *ngFor="let trans of curretViewTransactions" class="col-md-8 offset-md-2 mt-5" style="border: solid; border-color: rgb(177,177,177); border-radius: 14px;">
         <div class="row mx-2">
           <div class="col-12">
+    
               <div class="text-center">
                   <table style="width:100%">
                       <tr>
@@ -63,12 +64,13 @@
                         <td><h2 class="colored m-auto">{{trans.price}} <span style="color: gold;">&#xf153;</span></h2></td>
                         <td><h2 class="colored m-auto">{{trans.cathegory}}</h2></td>
                         <td><h4 class="colored m-auto">{{trans.date | date}}</h4></td>
-                        <td><h2 class="colored m-auto"><span ngbPopover="{{trans.info}}" popoverTitle="Transaction info" triggers="mouseenter:mouseleave" style="color: rgb(47, 235, 163)">&#xf05a;</span><span ngbPopover="Repeat transaction." triggers="mouseenter:mouseleave" style="cursor: pointer" class="mx-3">&#xf01e;</span></h2></td>
-                        <td><h2 class="colored m-auto"><span ngbPopover="Delete" triggers="mouseenter:mouseleave" style="color: red; cursor: pointer">&#xf00d;</span></h2></td>
+                        <td><h2 class="colored m-auto"><span ngbPopover="{{trans.info}}" popoverTitle="Transaction info" triggers="mouseenter:mouseleave" style="color: rgb(47, 235, 163)">&#xf05a;</span><span (click)="repeatTransaction(trans)" ngbPopover="Repeat transaction." triggers="mouseenter:mouseleave" style="cursor: pointer" class="mx-3">&#xf01e;</span></h2></td>
+                        <td><h2 class="colored m-auto"><span (click)="onDelete(trans.id)"ngbPopover="Delete" triggers="mouseenter:mouseleave" style="color: red; cursor: pointer">&#xf00d;</span></h2></td>
                       </tr>
                     </table> 
                 </div>
-          </div>
+          
+        </div>
           </div>
         </div>
         <div *ngIf="!isLoading"  class="col-12 mt-5">

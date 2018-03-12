@@ -20,4 +20,8 @@ export class TransactionService {
     getTransactionList(): Observable<Transaction[]> {
         return this.http.get<Transaction[]>("http://localhost:8080/list/all", {headers: this.authService.getHeader()});
     }
+
+    delete(id: number){
+        return this.http.get<Boolean>("http://localhost:8080/delete/trans/" + id, {headers: this.authService.getHeader()});
+    }
 }

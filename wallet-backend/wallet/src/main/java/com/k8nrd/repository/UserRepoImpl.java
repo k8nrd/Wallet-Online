@@ -127,7 +127,7 @@ public class UserRepoImpl implements UserRepository {
 		Expense i = new Expense();
 		i.setCathegory(transaction.getCathegory());
 		i.setDate(transaction.getDate());
-		i.setFlag(true);
+		i.setFlag(false);
 		i.setInfo(transaction.getInfo());
 		i.setPrice(transaction.getPrice());
 		ut.getTransactionList().add(i);

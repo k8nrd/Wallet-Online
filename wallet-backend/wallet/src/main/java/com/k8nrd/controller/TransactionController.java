@@ -40,23 +40,13 @@ public class TransactionController {
 	@PostMapping("/add/income")
 	public ResponseEntity<Income> saveIncome(@RequestBody IncomeDTO income, Principal prinicpal) throws JsonProcessingException{
 		this.ur.addUserTransactionIncome(prinicpal.getName(), income);
-		System.out.println("ok1");
 		return new ResponseEntity<Income>(HttpStatus.OK);
 	}
 	
 	@PostMapping("/add/expense")
 	public ResponseEntity<Expense> saveIncome(@RequestBody ExpenseDTO expense, Principal prinicpal){
-		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		String json;
-		try {
-			json = ow.writeValueAsString(expense);
-			System.out.println(json);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return new ResponseEntity<Expense>(HttpStatus.CONFLICT);
+		this.ur.addUserTransactionExpense(prinicpal.getName(), expense);
+		return new ResponseEntity<Expense>(HttpStatus.OK);
 	}
 	
 	@GetMapping("/list/all")
@@ -79,7 +69,7 @@ public class TransactionController {
 			ls.add(in2);
 			ls.add(in);
 		}
-		return new ResponseEntity<List<Transaction>>(ls, HttpStatus.OK);
+		return new ResponseEntity<List<Transaction>>(this.ur.getUserTransactionList(prinicpal.getName()), HttpStatus.OK);
 	}
 	
 	@PostMapping("/register")
@@ -90,6 +80,13 @@ public class TransactionController {
 		}else {
 			return new ResponseEntity<>(false,HttpStatus.CONFLICT);
 		}
+	}
+	
+	@GetMapping("/delete/trans/{id}")
+	public ResponseEntity<Boolean> delete(@PathVariable int id, Principal principal){
+		System.out.println(id + " " + principal.getName());
+		this.ur.deleteUserTransaction(principal.getName(), id);
+		return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
 	}
 	
 }
