@@ -35,7 +35,7 @@ export class AppService {
  
   isLogged():boolean{
     if (!this.cookie.check('access_token')){
-        this._router.navigate(['/login']);
+       // this._router.navigate(['/login']);
         return false;
     }else {
         return true;

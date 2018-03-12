@@ -26,6 +26,9 @@ import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
 import { ChartRouter } from './Main/main/charts/chart-router';
+import { MainGuard } from './main-guard';
+import { AppRouter } from './main-router';
+import { AuthGuard } from './auth-guard';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
 @NgModule({
@@ -51,9 +54,10 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     RegisterRouter,
     HttpClientModule,
     FusionChartsModule,
-    ChartRouter
+    ChartRouter,
+    AppRouter
   ],
-  providers: [AppService, CookieService, TransactionService],
+  providers: [AppService, CookieService, TransactionService, MainGuard,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
