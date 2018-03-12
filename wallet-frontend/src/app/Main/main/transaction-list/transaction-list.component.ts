@@ -16,9 +16,13 @@ export class TransactionListComponent implements OnInit {
   private filteredTransactions: Transaction[];
   private page:number;
   private pagesNumber:number;
+  private expensesSum;
+  private incomesSum;
+  private balance;
   constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {
+    this.balance = 0;
     this.transactionService.getTransactionList().subscribe(data => {
       this.transactions = data;
       this.isLoading = false;
@@ -30,6 +34,22 @@ export class TransactionListComponent implements OnInit {
       this.isError = true;
       console.log(err);
     })
+  }
+
+  balanceCount() {
+    let incomes =0
+    let expenseSum=0
+
+    this.transactions.forEach(tran => {
+      if(tran.flag){
+        incomes+=tran.price;
+      }else{
+        expenseSum+=tran.price;
+      }
+    });
+    this.incomesSum = incomes;
+    this.expensesSum = expenseSum;
+    this.balance = incomes - expenseSum;
   }
 
   onFilterChoose(id) {

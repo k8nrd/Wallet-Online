@@ -3,6 +3,7 @@ import { IncomeCathegory, ExpenseCathegory } from '../../../Domains/app-interfac
 import { isNumber } from 'util';
 import { TransactionService } from '../../../Services/transaction-service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-add',
@@ -22,7 +23,7 @@ export class TransactionAddComponent implements OnInit {
   private expenseCathegory: string[];
   private cathegoryView: string[];
 
-  constructor(private transactionService: TransactionService, private cdRef : ChangeDetectorRef) { }
+  constructor(private transactionService: TransactionService, private cdRef : ChangeDetectorRef, private route:Router) { }
 
   ngOnInit() {
     this.initiation();
@@ -50,13 +51,13 @@ export class TransactionAddComponent implements OnInit {
   onAdd() {
     if(this.incomeFlag){
      this.transactionService.addIncome({date: this.date, cathegory: this.cathegory, flag: true, info: this.info, price: this.amount}).subscribe(date => {
-      console.log("spoko");
+      this.route.navigate(['/list'])
      })
     }else {
       this.transactionService.addExpense({date: this.date, cathegory: this.cathegory, flag: false, info: this.info, price: this.amount}).subscribe(date => {
-        console.log("tutajnie powinego tego byc");
+        this.route.navigate(['/list'])
       }, err => {
-        console.log("blad !1!, ale ok")
+        console.log("Error!");
       })
     }
   }

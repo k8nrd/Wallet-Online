@@ -3,9 +3,12 @@
 <div class="container-fluid">
   <div class="row my-3">
       <div class="col-4"><div class="text-center">
-          D
+          <p style="text-align: right"><b>incomes: {{balance}}<span style="color: gold;">&#xf153;</span></b></p>
+          <p style="text-align: right"><b>expenses: {{balance}}<span style="color: gold;">&#xf153;</span></b></p>
+      <hr>
+      <h3 style="text-align: right"><b>account balance: {{balance}}<span style="color: gold;">&#xf153;</span></b></h3>
         </div></div>
-    <div class="col-4">
+    <div *ngIf="!isLoading"  class="col-4">
       <div class="text-center">
         <h1 style="color: rgb(47, 235, 163)"><b>Transaction list</b></h1>
         <div class="btn-group">
@@ -31,8 +34,23 @@
       </div>
     </div>
     <div class="col-4"><div class="text-center">
-      D
+      <h1 ><span routerLink="/add" style="cursor: pointer" class="mx-5">&#xf0fe; </span><span style="cursor: pointer" routerLink="/charts">&#xf080;</span></h1>
     </div></div>
+  </div>
+
+  <div *ngIf="transactions.length == 0" class="row">
+    <div class="col-12">
+    <div class="text-center">
+   <h1>You have no transactions click <span routerLink="/add" style="color:rgb(47, 235, 163); cursor: pointer">here</span> to add some!</h1>
+  </div>
+  </div>
+  </div>
+  <div *ngIf="isLoading" class="row">
+    <div class="col-12">
+    <div class="text-center">
+        <h1>Loading...</h1>
+    </div>
+  </div>
   </div>
     <div *ngIf="!isLoading" class="row">
       <div *ngFor="let trans of curretViewTransactions" class="col-md-8 offset-md-2 mt-5" style="border: solid; border-color: rgb(177,177,177); border-radius: 14px;">
@@ -53,7 +71,7 @@
           </div>
           </div>
         </div>
-        <div class="col-12 mt-5">
+        <div *ngIf="!isLoading"  class="col-12 mt-5">
             <div class="text-center">
                 <ngb-pagination class="d-flex justify-content-center" [collectionSize]="pagesNumber" (pageChange)="onPageChange($event)" [(page)]="page"></ngb-pagination>
             </div>
