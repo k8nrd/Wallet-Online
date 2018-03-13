@@ -1,16 +1,21 @@
 ## Technologies
- -Spring (MVC, Boot, Security),  Angular 5,  JPA/Hibernate, HTML/CSS, OAuth2 
+ - Spring (MVC, Boot, Security)
+ - Angular 5
+ - JPA/Hibernate
+ - HTML/CSS
+ - OAuth2 
+ - Bootstrap
 
 ## Features
 
 
 #### At this moment
--Transaction operations CRUD
--Login/Registrer user
--Chart
+- Transaction operations CRUD
+- Login/Registrer user
+- Chart
 
 #### New Features Coming Soon
 
--Android app
--User account managment
--More statistics and charts
+- Android app
+- User account managment
+- More statistics and charts
