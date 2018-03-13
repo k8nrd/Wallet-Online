@@ -29,6 +29,7 @@ import { ChartRouter } from './Main/main/charts/chart-router';
 import { MainGuard } from './main-guard';
 import { AppRouter } from './main-router';
 import { AuthGuard } from './auth-guard';
+import { FooterComponent } from './Footer/footer/footer.component';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
 @NgModule({
@@ -41,7 +42,8 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     NavMenuComponent,
     TransactionListComponent,
     TransactionAddComponent,
-    ChartsComponent
+    ChartsComponent,
+    FooterComponent
   ],
   imports: [
     NgbModule.forRoot(),

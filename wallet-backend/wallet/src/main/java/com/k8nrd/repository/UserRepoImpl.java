@@ -1,12 +1,10 @@
 package com.k8nrd.repository;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
-import javax.transaction.UserTransaction;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -27,7 +25,7 @@ import com.k8nrd.domains.UserTransactions;
 @Repository
 @Transactional
 public class UserRepoImpl implements UserRepository {
-	
+
 	@Autowired
 	private SessionFactory sf;
 
@@ -36,9 +34,9 @@ public class UserRepoImpl implements UserRepository {
 		Criteria c = this.sf.getCurrentSession().createCriteria(User.class);
 		c.add(Restrictions.eq("username", username));
 		List<User> ut = c.list();
-		if(ut.size() == 0){
+		if (ut.size() == 0) {
 			return null;
-		}else {
+		} else {
 			return ut.get(0);
 		}
 	}
@@ -46,19 +44,17 @@ public class UserRepoImpl implements UserRepository {
 	@Override
 	public List<Transaction> getUserTransactionList(String username) {
 		UserTransactions ut = this.getUserDetailsTransaction(username);
-		if(ut != null){
+		if (ut != null) {
 			return ut.getTransactionList();
-		}else
-		{
+		} else {
 			return null;
 		}
-		 
-	}
 
+	}
 
 	@Override
 	public Transaction updateUserTransaction(String username, Transaction transaction) {
-		//UserTransactions ut = this.getUserDetailsTransaction(username);
+		// UserTransactions ut = this.getUserDetailsTransaction(username);
 		return null;
 	}
 
@@ -67,13 +63,19 @@ public class UserRepoImpl implements UserRepository {
 		UserTransactions ut = this.getUserDetailsTransaction(username);
 		int index = 0;
 		int iter = 0;
-		for(Transaction t : ut.getTransactionList()){
-			if(t.getId() == id){
+		boolean flag = false;
+		for (Transaction t : ut.getTransactionList()) {
+			if (t.getId() == id) {
+				flag = true;
 				index = iter;
 			}
 			iter++;
 		}
-		return ut.getTransactionList().remove(index);
+		if (flag) {
+			return ut.getTransactionList().remove(index);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -101,9 +103,9 @@ public class UserRepoImpl implements UserRepository {
 		c.add(Restrictions.eq("username", username));
 		List<UserTransactions> ut = c.list();
 		System.out.println(ut.size() + ut.toString());
-		if(ut.size() == 0){
+		if (ut.size() == 0) {
 			return null;
-		}else {
+		} else {
 			return ut.get(0);
 		}
 	}

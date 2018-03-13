@@ -19,22 +19,12 @@ export class TransactionListComponent implements OnInit {
   private expensesSum;
   private incomesSum;
   private balance;
+
   constructor(private transactionService: TransactionService, private cdRef : ChangeDetectorRef) { }
 
   ngOnInit() {
     this.balance = 0;
-    this.transactionService.getTransactionList().subscribe(data => {
-      this.transactions = data;
-      this.isLoading = false;
-      this.filteredTransactions = this.transactions;
-      this.curretViewTransactions = this.filteredTransactions.slice(0,5);
-      this.page = 1;
-      this.pagesNumber = (this.filteredTransactions.length / 5)*10;
-      this.balanceCount();
-    },err => {
-      this.isError = true;
-      console.log(err);
-    })
+    this.initMethod();
   }
 
   balanceCount() {
@@ -76,7 +66,7 @@ export class TransactionListComponent implements OnInit {
   }
 
   onSortChoose() {
-
+    //TODO money, date, cathegory sort add.
   }
 
   onPageChange(newPage) {
@@ -88,6 +78,8 @@ export class TransactionListComponent implements OnInit {
     this.transactionService.delete(id).subscribe(date => {
       this.cdRef.detectChanges();
       this.ngOnInit();
+    }, err => {
+      alert("This transaction dont exist, you can't delete it.");
     })
   
   }
@@ -102,6 +94,22 @@ export class TransactionListComponent implements OnInit {
         this.ngOnInit();
       });
     }
+  }
+
+
+  initMethod(){
+    this.transactionService.getTransactionList().subscribe(data => {
+      this.transactions = data;
+      this.isLoading = false;
+      this.filteredTransactions = this.transactions;
+      this.curretViewTransactions = this.filteredTransactions.slice(0,5);
+      this.page = 1;
+      this.pagesNumber = (this.filteredTransactions.length / 5)*10;
+      this.balanceCount();
+    },err => {
+      this.isError = true;
+      console.log(err);
+    });
   }
 
   

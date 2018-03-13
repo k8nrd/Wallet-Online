@@ -22,7 +22,7 @@ export class AppService {
   }
  
   saveToken(token){
-    var expireDate = 1/24;
+    var expireDate = 10/24;
     this.cookie.set("access_token", token.access_token, expireDate);
     this._router.navigate(['/list']);
   }
