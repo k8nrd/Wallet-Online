@@ -23,13 +23,18 @@ import com.k8nrd.domains.NewUserDTO;
 import com.k8nrd.domains.Transaction;
 import com.k8nrd.exception.NotFoundException;
 import com.k8nrd.repository.UserRepository;
+import com.k8nrd.services.AppUserService;
+import com.k8nrd.services.TransactionService;
 
 
 @RestController
 public class TransactionController {
 
 	@Autowired
-	private UserRepository ur;
+	private TransactionService ur;
+	
+	@Autowired
+	private AppUserService us;
 	
 	
 	@PostMapping("/add/income")
@@ -51,8 +56,8 @@ public class TransactionController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<Boolean> register(@RequestBody NewUserDTO newUser) {
-		if(this.ur.findOneByUsername(newUser.getUsername()) == null){
-			this.ur.registerUser(newUser);
+		if(this.us.loadUserByUsername(newUser.getUsername()) == null){
+			this.us.registerUser(newUser);
 			return new ResponseEntity<>(true, HttpStatus.CREATED);
 		}else {
 			return new ResponseEntity<>(false,HttpStatus.CONFLICT);
