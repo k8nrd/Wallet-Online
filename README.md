@@ -23,6 +23,6 @@
 - More statistics and charts
 
 ## Screenshots
-![](https://github.com/k8nrd/wallet-online/blob/master/screenshots/1.jpeg)
-![](https://github.com/k8nrd/wallet-online/blob/master/screenshots/2.jpeg)
-![](https://github.com/k8nrd/wallet-online/blob/master/screenshots/3.jpeg)
+![](https://github.com/k8nrd/wallet-online/blob/master/screenshots/1.jpg)
+![](https://github.com/k8nrd/wallet-online/blob/master/screenshots/2.jpg)
+![](https://github.com/k8nrd/wallet-online/blob/master/screenshots/3.jpg)
