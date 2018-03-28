@@ -32,11 +32,11 @@
         </div>
         <div class="row mx-5 mt-3">
             <div class="col-12">
-              <label>cathegory <span style="color: red" *ngIf="cth.invalid">(required)</span> </label>
+              <label>category <span style="color: red" *ngIf="cth.invalid">(required)</span> </label>
               <select required class="form-control" #cth="ngModel" [(ngModel)]="cathegory">
                   <option [value]="c" *ngFor="let c of cathegoryView">{{c}}</option>
               </select>
-              {{cathegory}}
+              {{category}}
             </div>
           </div>
         <div class="row mx-5 mt-3">

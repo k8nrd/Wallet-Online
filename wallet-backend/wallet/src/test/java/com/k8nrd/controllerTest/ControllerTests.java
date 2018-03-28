@@ -59,6 +59,8 @@ public class ControllerTests {
 	
     @Autowired
     private FilterChainProxy springSecurityFilterChain;
+    
+    //TODO add test to every mapped method.
 
     @Before
     public void startMocks(){
@@ -76,6 +78,8 @@ public class ControllerTests {
 	public void testTest() throws Exception {
 		mockMvc.perform(get("/list/all").with(this.authHelper.addBearerToken("test")))
 		.andExpect(status().isOk());
+		
+		//TODO check json response
 		verify(this.ts, times(1)).getUserTransactionList("test");
 	}
 	

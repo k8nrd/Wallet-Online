@@ -15,7 +15,7 @@ export class TransactionAddComponent implements OnInit {
   private expenseFlag = false;
   private info: string;
   private amount: number;
-  private cathegory: any;
+  private category: any;
   private date: Date;
   private modelDate: NgbDateStruct;
 
@@ -50,11 +50,11 @@ export class TransactionAddComponent implements OnInit {
 
   onAdd() {
     if(this.incomeFlag){
-     this.transactionService.addIncome({date: this.date, cathegory: this.cathegory, flag: true, info: this.info, price: this.amount}).subscribe(date => {
+     this.transactionService.addIncome({date: this.date, cathegory: this.category, flag: true, info: this.info, price: this.amount}).subscribe(date => {
       this.route.navigate(['/list'])
      })
     }else {
-      this.transactionService.addExpense({date: this.date, cathegory: this.cathegory, flag: false, info: this.info, price: this.amount}).subscribe(date => {
+      this.transactionService.addExpense({date: this.date, cathegory: this.category, flag: false, info: this.info, price: this.amount}).subscribe(date => {
         this.route.navigate(['/list'])
       }, err => {
         console.log("Error!");
@@ -83,7 +83,7 @@ export class TransactionAddComponent implements OnInit {
       this.expenseFlag = true;
       this.cathegoryView = this.expenseCathegory;
     }
-    this.cathegory = null;
+    this.category = null;
     this.cdRef.detectChanges();
   }
 }

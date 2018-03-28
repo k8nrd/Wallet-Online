@@ -10,13 +10,13 @@ export class AppService {
     private _router: Router, private _http: HttpClient, private cookie: CookieService){}
   
   obtainAccessToken(username:string, password:string){
-    let headers = new HttpHeaders({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("gigy:secret")});
+    let headers = new HttpHeaders({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa("xxxxxxxxx:xxxxxxxxxxxxxx")});
     let success=false;
     let params = new URLSearchParams();
     params.append('username',username);
     params.append('password',password);    
-    params.append('grant_type','password');
-    params.append('client_id','gigy');
+    params.append('grant_type','xxxxxxxxxxxxxxxx');
+    params.append('client_id','xxxxxxxxxxxxxxxx');
      
    return this._http.post('http://localhost:8080/oauth/token', params.toString(), {headers:headers});
   }
