@@ -33,7 +33,7 @@ export class ChartsComponent implements OnInit {
     let pFood:number=0;
     let pGoodies:number=0;
     let pUtils:number=0;
-
+    this.transaction.sort()
     this.transaction.forEach(element => {
       if(element.cathegory.toString() == ExpenseCathegory[ExpenseCathegory.CLOTHES]) {
         pClothes=pClothes+element.price;
